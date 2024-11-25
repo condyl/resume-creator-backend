@@ -9,7 +9,15 @@ const { generateProjectsSection } = require("./resumeGenerator/projects");
 const { generateSkillsSection } = require("./resumeGenerator/skills");
 
 const generateResume = (req, res) => {
-    const { personalInfo, education, workExperience, projects, skills } = req.body;
+    const { personalInfo, education, workExperience, projects, skills, showIcons } = req.body;
+    console.log(req.body);
+
+    const filteredPersonalInfo = Object.keys(personalInfo).reduce((acc, key) => {
+        if (showIcons[key] !== false) {
+            acc[key] = personalInfo[key];
+        }
+        return acc;
+    }, {});
 
     const educationSection = generateEducationSection(education);
     const workExperienceSection = generateWorkExperienceSection(workExperience);
@@ -17,7 +25,7 @@ const generateResume = (req, res) => {
     const skillsSection = generateSkillsSection(skills);
 
     const latexTemplate = getLatexTemplate(
-        personalInfo,
+        filteredPersonalInfo,
         educationSection,
         skillsSection,
         workExperienceSection,

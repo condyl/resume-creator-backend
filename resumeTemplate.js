@@ -1,4 +1,3 @@
-
 const getLatexTemplate = (personalInfo, educationSection, skillsSection, workExperienceSection, projectsSection) => `
 \\documentclass[letterpaper,11pt]{article}
 
@@ -81,10 +80,7 @@ const getLatexTemplate = (personalInfo, educationSection, skillsSection, workExp
 \\begin{center}
     \\textbf{\\Huge \\scshape ${personalInfo.name}} 
     \\\\ \\vspace{1pt} 
-    \\href{mailto:${personalInfo.email}}{\\underline{${personalInfo.email}}} 
-    $|$ \\href{https://linkedin.com/in/${personalInfo.linkedin}/}{\\underline{LinkedIn}}
-    $|$ \\href{https://github.com/${personalInfo.github}}{\\underline{GitHub}}
-    $|$ ${personalInfo.phone}
+    ${getPersonalInfoString(personalInfo)}
 \\end{center}
 
 \\section{Education}
@@ -107,5 +103,19 @@ ${skillsSection}
 
 \\end{document}
 `;
+
+function getPersonalInfoString(personalInfo) {
+  const personalInfoArray = [
+    personalInfo.email ? `\\href{mailto:${personalInfo.email}}{\\underline{${personalInfo.email}}}` : "",
+    personalInfo.email && (personalInfo.linkedin || personalInfo.github || personalInfo.phone) ? "$|$" : "",
+    personalInfo.linkedin ? `\\href{https://linkedin.com/in/${personalInfo.linkedin}/}{\\underline{LinkedIn}}` : "",
+    personalInfo.linkedin && (personalInfo.github || personalInfo.phone) ? "$|$" : "",
+    personalInfo.github ? `\\href{https://github.com/${personalInfo.github}}{\\underline{GitHub}}` : "",
+    personalInfo.github && personalInfo.phone ? "$|$" : "",
+    personalInfo.phone ? personalInfo.phone : ""
+  ];
+  
+  return personalInfoArray.filter(Boolean).join(" ");
+}
 
 module.exports = getLatexTemplate;
