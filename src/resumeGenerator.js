@@ -10,7 +10,6 @@ const { generateSkillsSection } = require("./resumeGenerator/skills");
 
 const generateResume = (req, res) => {
     const { personalInfo, education, workExperience, projects, skills, showIcons } = req.body;
-    console.log(req.body);
 
     const filteredPersonalInfo = Object.keys(personalInfo).reduce((acc, key) => {
         if (showIcons[key] !== false) {
