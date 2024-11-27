@@ -55,8 +55,9 @@ const generateResume = (req, res) => {
                 const logFile = path.join(__dirname, "../uploads", `resume_${uniqueId}.log`);
                 const outFile = path.join(__dirname, "../uploads", `resume_${uniqueId}.out`);
                 const texFile = path.join(__dirname, "../uploads", texFileName);
+                const pdfFile = path.join(__dirname, "../uploads", pdfFileName);
 
-                [auxFile, logFile, outFile, texFile].forEach(file => {
+                [auxFile, logFile, outFile, texFile, pdfFile].forEach(file => {
                     fs.unlink(file, (err) => {
                         if (err) console.error(`Error deleting file ${file}: ${err.message}`);
                     });
