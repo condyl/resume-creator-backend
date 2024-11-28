@@ -1,3 +1,5 @@
+const { escapeLatex } = require('./src/resumeGenerator/escapeLatex');
+
 const getLatexTemplate = (personalInfo, educationSection, skillsSection, workExperienceSection, projectsSection) => `
 \\documentclass[letterpaper,11pt]{article}
 
@@ -78,7 +80,7 @@ const getLatexTemplate = (personalInfo, educationSection, skillsSection, workExp
 \\begin{document}
 
 \\begin{center}
-    \\textbf{\\Huge \\scshape ${personalInfo.name}} 
+    \\textbf{\\Huge \\scshape ${escapeLatex(personalInfo.name)}} 
     \\\\ \\vspace{1pt} 
     ${getPersonalInfoString(personalInfo)}
 \\end{center}
@@ -106,13 +108,13 @@ ${skillsSection}
 
 function getPersonalInfoString(personalInfo) {
   const personalInfoArray = [
-    personalInfo.email ? `\\href{mailto:${personalInfo.email}}{\\underline{${personalInfo.email}}}` : "",
+    personalInfo.email ? `\\href{mailto:${escapeLatex(personalInfo.email)}}{\\underline{${escapeLatex(personalInfo.email)}}}` : "",
     personalInfo.email && (personalInfo.linkedin || personalInfo.github || personalInfo.phone) ? "$|$" : "",
-    personalInfo.linkedin ? `\\href{https://linkedin.com/in/${personalInfo.linkedin}/}{\\underline{LinkedIn}}` : "",
+    personalInfo.linkedin ? `\\href{https://linkedin.com/in/${escapeLatex(personalInfo.linkedin)}}{\\underline{LinkedIn}}` : "",
     personalInfo.linkedin && (personalInfo.github || personalInfo.phone) ? "$|$" : "",
-    personalInfo.github ? `\\href{https://github.com/${personalInfo.github}}{\\underline{GitHub}}` : "",
+    personalInfo.github ? `\\href{https://github.com/${escapeLatex(personalInfo.github)}}{\\underline{GitHub}}` : "",
     personalInfo.github && personalInfo.phone ? "$|$" : "",
-    personalInfo.phone ? personalInfo.phone : ""
+    personalInfo.phone ? escapeLatex(personalInfo.phone) : ""
   ];
   
   return personalInfoArray.filter(Boolean).join(" ");

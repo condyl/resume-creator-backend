@@ -1,13 +1,14 @@
+const { escapeLatex } = require('./escapeLatex');
 
 const generateWorkExperienceSection = (workExperience) => {
     return workExperience
         .map(
             (work) => `
     \\resumeSubheading
-      {${work.position}}{${work.dates}}
-      {${work.company}}{${work.location}}
+      {${escapeLatex(work.position)}}{${escapeLatex(work.dates)}}
+      {${escapeLatex(work.company)}}{${escapeLatex(work.location)}}
       \\resumeItemListStart
-        ${work.details.map((detail) => `\\resumeItem{${detail}}`).join("\n")}
+        ${work.details.map((detail) => `\\resumeItem{${escapeLatex(detail)}}`).join("\n")}
         \\resumeItemListEnd
     `
         )

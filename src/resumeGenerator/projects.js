@@ -1,12 +1,13 @@
+const { escapeLatex } = require('./escapeLatex');
 
 const generateProjectsSection = (projects) => {
     return projects
         .map(
             (project) => `
         \\resumeProjectHeading
-          {\\textbf{\\href{${project.link}}{\\underline{${project.title}}}} $|$ \\emph{${project.technologies}}}{}
+          {\\textbf{\\href{${escapeLatex(project.link)}}{\\underline{${escapeLatex(project.title)}}}} $|$ \\emph{${escapeLatex(project.technologies)}}}{}
           \\resumeItemListStart
-            ${project.details.map((detail) => `\\resumeItem{${detail}}`).join("\n")}
+            ${project.details.map((detail) => `\\resumeItem{${escapeLatex(detail)}}`).join("\n")}
             \\resumeItemListEnd
         `
         )
