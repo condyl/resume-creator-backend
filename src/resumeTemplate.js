@@ -1,4 +1,4 @@
-const { escapeLatex } = require('./src/resumeGenerator/escapeLatex');
+const { escapeLatex } = require('./resumeGenerator/escapeLatex');
 
 const getLatexTemplate = (personalInfo, educationSection, skillsSection, workExperienceSection, projectsSection) => `
 \\documentclass[letterpaper,11pt]{article}
