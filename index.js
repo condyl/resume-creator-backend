@@ -12,7 +12,7 @@ const openai = new OpenAI({
 });
 
 const app = express();
-const PORT = 5000;
+const PORT = config.port;
 
 app.use(cors());
 app.use(express.json());

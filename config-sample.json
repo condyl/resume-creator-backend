@@ -1,4 +1,4 @@
 {
-    "openaiApiKey": "openai-key-here"
+    "openaiApiKey": "openai-key-here",
+    "port": 5000
 }
-  
