@@ -29,6 +29,7 @@ ensureUploadsDir();
 app.post("/api/uploads", upload.single("resume"), handleUpload);
 app.post("/api/generate-resume", generateResume);
 app.post("/api/improve-text", improveText);
+app.get('/', (req, res)=>{ return res.status(200).json({ ok : true, message : "OK", status : 200 }) });
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
