@@ -1,13 +1,13 @@
 const { escapeLatex } = require('./escapeLatex');
 
-const generateEducationSection = (education, showCoursework = true) => {
+const generateEducationSection = (education) => {
     return education
         .map(
             (edu) => `
     \\resumeSubheading
       {${escapeLatex(edu.school)}}{${escapeLatex(edu.dates)}}
       {${escapeLatex(edu.degree)}${edu.program ? ` in ${escapeLatex(edu.program)}` : ''}}{${escapeLatex(edu.location)}}${
-        showCoursework && edu.coursework ? 
+        edu.showCoursework && edu.coursework ? 
         `\\resumeItem{\\textbf{Relevant Coursework:} ${escapeLatex(edu.coursework)}}` : 
         ''
       }`
