@@ -109,11 +109,13 @@ ${skillsSection}
 function getPersonalInfoString(personalInfo) {
   const personalInfoArray = [
     personalInfo.email ? `\\href{mailto:${escapeLatex(personalInfo.email)}}{\\underline{${escapeLatex(personalInfo.email)}}}` : "",
-    personalInfo.email && (personalInfo.linkedin || personalInfo.github || personalInfo.phone) ? "$|$" : "",
+    personalInfo.email && (personalInfo.linkedin || personalInfo.github || personalInfo.website || personalInfo.phone) ? "$|$" : "",
     personalInfo.linkedin ? `\\href{https://linkedin.com/in/${escapeLatex(personalInfo.linkedin)}}{\\underline{LinkedIn}}` : "",
-    personalInfo.linkedin && (personalInfo.github || personalInfo.phone) ? "$|$" : "",
+    personalInfo.linkedin && (personalInfo.github || personalInfo.website || personalInfo.phone) ? "$|$" : "",
     personalInfo.github ? `\\href{https://github.com/${escapeLatex(personalInfo.github)}}{\\underline{GitHub}}` : "",
-    personalInfo.github && personalInfo.phone ? "$|$" : "",
+    personalInfo.github && (personalInfo.website || personalInfo.phone) ? "$|$" : "",
+    personalInfo.website ? `\\href{${escapeLatex(personalInfo.website)}}{{\\underline{Website}}}` : "",
+    personalInfo.website && personalInfo.phone ? "$|$" : "",
     personalInfo.phone ? escapeLatex(personalInfo.phone) : ""
   ];
   
