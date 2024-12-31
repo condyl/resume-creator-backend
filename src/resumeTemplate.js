@@ -47,11 +47,11 @@ const getLatexTemplate = (personalInfo, educationSection, skillsSection, workExp
 }
 
 \\newcommand{\\resumeSubheading}[4]{
-  \\vspace{-2pt}\\item
-    \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}
-      \\textbf{#1} & #2 \\\\
-      \\textit{\\small#3} & \\textit{\\small #4} \\\\
-    \\end{tabular*}\\vspace{-7pt}
+    \\vspace{-2pt}\\item\\small
+        \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}
+            \\textbf{#1} & #2 \\\\
+            \\textit{#3} & \\textit{#4} \\\\
+        \\end{tabular*}\\vspace{-7pt}
 }
 
 \\newcommand{\\resumeSubSubheading}[2]{

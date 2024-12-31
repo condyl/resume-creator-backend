@@ -5,8 +5,8 @@ const generateWorkExperienceSection = (workExperience) => {
         .map(
             (work) => `
     \\resumeSubheading
-      {${escapeLatex(work.position)}}{${escapeLatex(work.dates)}}
-      {${escapeLatex(work.company)}}{${escapeLatex(work.location)}}
+      {${escapeLatex(work.position)}}{\\small ${escapeLatex(work.dates)}}
+      {${escapeLatex(work.company)}}{\\small ${escapeLatex(work.location)}}
       \\resumeItemListStart
         ${work.details.map((detail) => `\\resumeItem{${escapeLatex(detail)}}`).join("\n")}
         \\resumeItemListEnd

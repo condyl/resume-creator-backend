@@ -22,7 +22,7 @@ const generateProjectsSection = (projects) => {
 
                 return `
         \\resumeProjectHeading
-          {\\textbf{${escapeLatex(project.name)}}${techText}}{${linkText}${dateText}}
+          {\\textbf{${escapeLatex(project.name)}}${techText}}{\\small ${linkText}${dateText}}
           \\resumeItemListStart
             ${project.details.map((detail) => `\\resumeItem{${escapeLatex(detail)}}`).join("\n")}
             \\resumeItemListEnd
