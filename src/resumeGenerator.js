@@ -9,7 +9,7 @@ const { generateProjectsSection } = require("./resumeGenerator/projects");
 const { generateSkillsSection } = require("./resumeGenerator/skills");
 
 const generateResume = (req, res) => {
-    const { personalInfo, education, workExperience, projects, skills, showIcons } = req.body;
+    const { personalInfo, education, workExperience, projects, skills, showIcons, format } = req.body;
 
     const filteredPersonalInfo = Object.keys(personalInfo).reduce((acc, key) => {
         if (showIcons[key] !== false) {
@@ -31,6 +31,12 @@ const generateResume = (req, res) => {
         projectsSection
     );
 
+    // If format is latex, return the source code directly
+    if (format === 'latex') {
+        return res.json({ latex: latexTemplate });
+    }
+
+    // Otherwise, generate PDF as before
     const uniqueId = uuidv4();
     const texFileName = `resume_${uniqueId}.tex`;
     const pdfFileName = `resume_${uniqueId}.pdf`;
