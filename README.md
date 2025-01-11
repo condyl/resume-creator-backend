@@ -62,13 +62,22 @@ yarn global add nodemon
 cp .env.example .env
 
 # Edit .env with your credentials:
-# - SUPABASE_URL
-# - SUPABASE_SERVICE_KEY
-# - JWT_SECRET
+# - SUPABASE_URL (from Supabase Project Settings > API > Project URL)
+# - SUPABASE_SERVICE_KEY (from Supabase Project Settings > API > service_role key)
 # - PORT (optional, defaults to 3001)
 ```
 
-4. Verify LaTeX installation:
+4. Create your config file:
+```bash
+# Copy the sample config file
+cp config-sample.json config.json
+
+# Edit config.json with your settings:
+# - port: Your desired port number
+# - openaiApiKey: Your OpenAI API key
+```
+
+5. Verify LaTeX installation:
 ```bash
 # This should display the pdflatex version
 pdflatex --version
@@ -85,42 +94,33 @@ nodemon index.js
 
 The API will be available at `http://localhost:3001` (or your specified PORT).
 
-## Environment Variables
-
-Required environment variables:
-
-- `SUPABASE_URL`: Your Supabase project URL
-- `SUPABASE_SERVICE_KEY`: Your Supabase service role key (NOT the anon key)
-- `JWT_SECRET`: Secret key for JWT token generation
-- `PORT`: Port number for the server (optional, defaults to 3001)
-
 ## API Endpoints
 
-- `/api/auth`: Authentication endpoints
-- `/api/resume`: Resume CRUD operations
-- `/api/pdf`: PDF generation endpoints
+* `GET /`: Health check endpoint
+  - Returns: `{ ok: true, message: "OK", status: 200 }`
+
+* `POST /api/generate-resume`: Generate a resume PDF
+  - Body: Resume data object
+  - Returns: Generated PDF file
+
+* `POST /api/improve-text`: Improve text using AI
+  - Body: Text to improve
+  - Returns: Improved text suggestions
 
 ## Features
 
-- User authentication and authorization
-- Resume data management
-- PDF generation with LaTeX templates
-- File upload handling
-- Secure API endpoints
-- Integration with Supabase
+* Resume PDF generation with LaTeX templates
+* AI-powered text improvement
+* Health check endpoint
+* File upload handling
+* Integration with OpenAI API
 
 ## Tech Stack
 
-- Node.js
-- Express.js
-- Supabase
-- LaTeX (pdflatex) for PDF generation
-- JWT for authentication
+* Node.js
+* Express.js
+* LaTeX (pdflatex) for PDF generation
+* OpenAI API for text improvements
+* Multer for file handling
 
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+##
